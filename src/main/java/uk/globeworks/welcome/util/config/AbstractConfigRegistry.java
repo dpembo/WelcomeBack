@@ -1,4 +1,4 @@
-package dev.hadimhz.welcome.util.config;
+package uk.globeworks.welcome.util.config;
 
 
 import java.io.File;

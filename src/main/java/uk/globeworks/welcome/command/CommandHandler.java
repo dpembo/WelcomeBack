@@ -1,14 +1,15 @@
-package dev.hadimhz.welcome.command;
+package uk.globeworks.welcome.command;
 
-import dev.hadimhz.welcome.config.Config;
-import dev.hadimhz.welcome.listener.PlayerListener;
-import dev.hadimhz.welcome.util.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+
+import uk.globeworks.welcome.config.Config;
+import uk.globeworks.welcome.listener.PlayerListener;
+import uk.globeworks.welcome.util.Chat;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;

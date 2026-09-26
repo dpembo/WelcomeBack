@@ -1,14 +1,16 @@
-package dev.hadimhz.welcome;
+package uk.globeworks.welcome;
 
-import dev.hadimhz.welcome.command.CommandHandler;
-import dev.hadimhz.welcome.config.Config;
-import dev.hadimhz.welcome.listener.PlayerListener;
-import dev.hadimhz.welcome.util.config.ConfigRegistry;
-import dev.hadimhz.welcome.util.config.JsonConfigRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import uk.globeworks.welcome.command.CommandHandler;
+import uk.globeworks.welcome.config.Config;
+import uk.globeworks.welcome.listener.PlayerListener;
+import uk.globeworks.welcome.util.config.ConfigRegistry;
+import uk.globeworks.welcome.util.config.JsonConfigRegistry;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public class WelcomePlugin extends JavaPlugin {
 
@@ -17,6 +19,8 @@ public class WelcomePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         getDataFolder().mkdirs();
+        final Logger logger = getLogger();
+        logger.info(Globeworks.logo("WelcomeBack", getDescription().getVersion()));        
         final ConfigRegistry configRegistry = new JsonConfigRegistry();
 
         final Config config = configRegistry.register(Config.class, new Config(), new File(getDataFolder(), "config.json"));

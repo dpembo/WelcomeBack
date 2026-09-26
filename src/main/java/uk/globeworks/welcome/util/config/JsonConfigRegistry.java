@@ -1,4 +1,4 @@
-package dev.hadimhz.welcome.util.config;
+package uk.globeworks.welcome.util.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,4 +1,4 @@
-package dev.hadimhz.welcome.config;
+package uk.globeworks.welcome.config;
 
 import com.google.common.collect.ImmutableList;
 

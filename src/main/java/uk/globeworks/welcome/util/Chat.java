@@ -1,4 +1,4 @@
-package dev.hadimhz.welcome.util;
+package uk.globeworks.welcome.util;
 
 import org.bukkit.Bukkit;
 

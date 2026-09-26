@@ -1,7 +1,5 @@
-package dev.hadimhz.welcome.listener;
+package uk.globeworks.welcome.listener;
 
-import dev.hadimhz.welcome.config.Config;
-import dev.hadimhz.welcome.util.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,6 +8,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+
+import uk.globeworks.welcome.config.Config;
+import uk.globeworks.welcome.util.Chat;
 
 import java.util.*;
 import java.util.logging.Level;
