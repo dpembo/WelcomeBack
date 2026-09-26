@@ -10,9 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public abstract class AbstractConfigRegistry implements ConfigRegistry {
+
+    private static final Logger LOGGER = Logger.getLogger(AbstractConfigRegistry.class.getName());
 
     protected final Map<Class<?>, Conf> loadedConfigs = new ConcurrentHashMap<>();
 
@@ -26,16 +30,20 @@ public abstract class AbstractConfigRegistry implements ConfigRegistry {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Failed to create config file " + file.getPath(), e);
             }
         }
 
-        registerData(clazz, instance, file);
+        // Use whatever's already on disk if present; otherwise fall back to the
+        // caller's default instance. Gson invokes the class's own no-arg
+        // constructor when loading, so any field missing from the file already
+        // keeps its code-defined default - no extra merging needed here.
+        Type resolved = load(clazz, file).orElse(instance);
 
-        reload(clazz, instance, file);
-        save(instance, file);
+        registerData(clazz, resolved, file);
+        save(resolved, file);
 
-        return instance;
+        return resolved;
     }
 
     protected void trySave(Object obj, File file, Predicate<File> predicate, BiConsumer<Object, File> consumer) {
@@ -50,7 +58,7 @@ public abstract class AbstractConfigRegistry implements ConfigRegistry {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to save config to " + file.getPath(), e);
         }
     }
 
@@ -66,7 +74,7 @@ public abstract class AbstractConfigRegistry implements ConfigRegistry {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Failed to create config file " + file.getPath(), e);
             }
         }
 

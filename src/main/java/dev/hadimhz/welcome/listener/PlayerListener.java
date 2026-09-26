@@ -12,12 +12,15 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlayerListener implements Listener {
 
     private final Map<UUID, Long> userJoinTimer = new HashMap<>();
     private final Set<UUID> welcomed;
     private final Config config;
+    private final Logger logger;
     private long joinedAt;
     private Player player;
 
@@ -25,6 +28,7 @@ public class PlayerListener implements Listener {
     public PlayerListener(Plugin plugin, Config config) {
 
         this.config = config;
+        this.logger = plugin.getLogger();
 
         this.welcomed = new HashSet<>();
 
@@ -37,15 +41,22 @@ public class PlayerListener implements Listener {
 
         final UUID uuid = event.getPlayer().getUniqueId();
         final long elapsed = (System.currentTimeMillis() - userJoinTimer.getOrDefault(uuid, 0L)) / 1000;
+        final boolean withinDelay = config.onlyWelcomeAfterXDelay != -1 && elapsed < config.onlyWelcomeAfterXDelay;
+        final boolean vanished = isVanished(event.getPlayer());
 
-        System.out.println(elapsed + " / " + config.onlyWelcomeAfterXDelay);
-        System.out.println((config.onlyWelcomeAfterXDelay != -1 && (elapsed < config.onlyWelcomeAfterXDelay)) + " : " + (config.onlyWelcomeAfterXDelay != -1) + " " + (elapsed < config.onlyWelcomeAfterXDelay));
-        System.out.println("vanished?" + isVanished(event.getPlayer()));
+        if (logger.isLoggable(Level.FINE)) {
+            logger.fine(() -> String.format(
+                    "%s rejoined after %ds (delay threshold=%d, withinDelay=%b, vanished=%b)",
+                    event.getPlayer().getName(), elapsed, config.onlyWelcomeAfterXDelay, withinDelay, vanished));
+        }
 
-        if (isVanished(event.getPlayer()) || (config.onlyWelcomeAfterXDelay != -1 && (elapsed < config.onlyWelcomeAfterXDelay)))
+        if (vanished || withinDelay) {
+            logger.fine(() -> "Skipping welcome message for " + event.getPlayer().getName()
+                    + " (vanished=" + vanished + ", withinDelay=" + withinDelay + ")");
             return;
+        }
 
-        System.out.println(1);
+        logger.fine(() -> "Broadcasting welcome message for " + event.getPlayer().getName());
 
         player = event.getPlayer();
 
