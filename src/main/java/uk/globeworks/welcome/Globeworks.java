@@ -14,10 +14,11 @@ public class Globeworks {
         
         String interleaved1 = YELLOW + " __________     ";
         String interleaved2 = YELLOW + "()_________)    ";
-        String interleaved3 = YELLOW + " \\" + RESET + " Welcome      " + YELLOW;
-        String interleaved4 = YELLOW + "  \\" + RESET + "  Back      " + YELLOW ;
+        String interleaved3 = YELLOW + " \\" + RESET + " Welcome \\    " + YELLOW;
+        String interleaved4 = YELLOW + "  \\" + RESET + "  Back   \\   " + YELLOW ;
         String interleaved5 = YELLOW + "   \\_________\\  ";
         String interleaved6 = YELLOW + "   ()_________) ";   
+        String interleaved7 = YELLOW + "                ";
         String logo = "\n" +
 
         
@@ -33,11 +34,11 @@ public class Globeworks {
         RED + " ________ _______ ______ __  __ _______\n" +
         interleaved6 +
         RED + "|  |  |  |       |   __ \\  |/  |     __|\n" +
-        interleaved6 +
+        interleaved7 +
         RED + "|  |  |  |   -   |      <     <|__     |\n" +
-        interleaved6 +
+        interleaved7 +
         RED + "|________|_______|___|__|__|\\__|_______|\n" +
-        YELLOW + "\n" + interleaved6 +
+        YELLOW + "\n" + interleaved7 +
         YELLOW + pluginName + " v" + version + "\n" +
         RESET;
         return logo;
