@@ -1,6 +1,6 @@
 name: WelcomeBack
 main: uk.globeworks.welcome.WelcomePlugin
-version: 1.8
+version: 2.0
 api-version: 1.13
 
 commands:

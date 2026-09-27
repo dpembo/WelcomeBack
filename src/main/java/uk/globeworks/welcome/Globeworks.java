@@ -12,12 +12,12 @@ public class Globeworks {
 
     public static String logo(String pluginName, String version) {
         
-        String interleaved1 = YELLOW + " __________\r\n";
-        String interleaved2 = YELLOW + "()_________)\r\n";
-        String interleaved3 = YELLOW + " \\" + RESET + " Welcome " + YELLOW +"\r\n";
-        String interleaved4 = YELLOW + "  \\" + RESET + "  Back   " + YELLOW + "\r\n";
-        String interleaved5 = YELLOW + "   \\_________\\\r\n";
-        String interleaved6 = YELLOW + "   ()_________)\r\n";   
+        String interleaved1 = YELLOW + " __________     ";
+        String interleaved2 = YELLOW + "()_________)    ";
+        String interleaved3 = YELLOW + " \\" + RESET + " Welcome      " + YELLOW;
+        String interleaved4 = YELLOW + "  \\" + RESET + "  Back      " + YELLOW ;
+        String interleaved5 = YELLOW + "   \\_________\\  ";
+        String interleaved6 = YELLOW + "   ()_________) ";   
         String logo = "\n" +
 
         
@@ -33,11 +33,11 @@ public class Globeworks {
         RED + " ________ _______ ______ __  __ _______\n" +
         interleaved6 +
         RED + "|  |  |  |       |   __ \\  |/  |     __|\n" +
-        YELLOW + "             " +
+        interleaved6 +
         RED + "|  |  |  |   -   |      <     <|__     |\n" +
-        YELLOW + "             " +
+        interleaved6 +
         RED + "|________|_______|___|__|__|\\__|_______|\n" +
-        YELLOW + "\n" +
+        YELLOW + "\n" + interleaved6 +
         YELLOW + pluginName + " v" + version + "\n" +
         RESET;
         return logo;
